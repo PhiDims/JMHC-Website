@@ -4,6 +4,11 @@
   "main": "worker/index.js",
   "compatibility_date": "2025-09-01",
   "keep_vars": true,
+  // Both addresses serve the site. Cloudflare attaches them on every deploy.
+  "routes": [
+    { "pattern": "josmhconference.com", "custom_domain": true },
+    { "pattern": "www.josmhconference.com", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./_site",
     "binding": "ASSETS",
