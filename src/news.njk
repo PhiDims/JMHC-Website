@@ -1,0 +1,44 @@
+---
+layout: layouts/base.njk
+title: News and Resources
+description: JMHC news, downloadable documents and the archive of past conference editions.
+permalink: /news/
+hero:
+  eyebrow: News and Resources
+  title: Updates, documents and the conference record
+---
+<div class="section">
+  <div class="wrap split">
+    <div>
+      <div class="sec-head"><p class="eyebrow">Latest</p><h2>News</h2></div>
+      {% for post in collections.news %}
+      <article class="news-item"><time datetime="{{ post.date | isoDate }}">{{ post.date | monthYear }}</time><div><h3><a href="{{ post.url }}" style="color:inherit">{{ post.data.title }}</a></h3><p>{{ post.data.summary }}</p></div></article>
+      {% else %}
+      <p class="muted">News will appear here.</p>
+      {% endfor %}
+    </div>
+    <div>
+      <div class="sec-head"><p class="eyebrow">Downloads</p><h2>Documents</h2></div>
+      <div class="grid">
+        {% for d in documents.items %}
+        <div class="doc"><span class="doc-ico">PDF</span><div>{% if d.file %}<a href="{{ d.file }}">{{ d.title }}</a>{% else %}<b>{{ d.title }}</b>{% endif %}<small>{{ d.detail }}</small></div>{% if d.file %}<a class="st st-ok" href="{{ d.file }}" style="text-decoration:none">Download</a>{% else %}<em class="st st-wait">{{ d.status or "Soon" }}</em>{% endif %}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section band" id="archive">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Archive</p><h2>Past editions</h2>
+      <p class="lead">Each edition keeps its own page: programme, speakers, photographs, media coverage, the conference report and key outcomes.</p></div>
+    {% set past = [] %}{% for e in collections.editions %}{% if e.data.year != conference.year %}{% set past = (past.push(e), past) %}{% endif %}{% endfor %}
+    {% if past.length %}
+    <div class="grid g3">
+      {% for e in past %}<a class="card" href="{{ e.url }}" style="text-decoration:none;color:inherit"><p class="eyebrow">{{ e.data.year }}</p><h3>{{ e.data.theme or ("JMHC " ~ e.data.year) }}</h3><p>{{ e.data.summary }}</p></a>{% endfor %}
+    </div>
+    {% else %}
+    <p class="muted">The {{ conference.year }} edition will be the first entry.</p>
+    {% endif %}
+  </div>
+</div>

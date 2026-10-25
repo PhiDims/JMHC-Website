@@ -1,0 +1,39 @@
+---
+layout: layouts/base.njk
+title: Contact
+description: Contact the Jos Mental Health Conference secretariat in Jos, Plateau State.
+permalink: /contact/
+hero:
+  eyebrow: Contact
+  title: Talk to the JMHC secretariat
+---
+<div class="section">
+  <div class="wrap split">
+    <div class="grid" style="gap:28px">
+      <div class="contact-list">
+        <div><small>Secretariat</small><b>{{ site.poweredBy }}</b><span class="muted">{{ site.city }}</span></div>
+        <div><small>Phone / WhatsApp</small><span><a href="tel:{{ site.phoneLink }}"><b>{{ site.phoneDisplay }}</b></a> · <a href="{{ 'Hello JMHC secretariat,' | wa(site.whatsapp) }}" target="_blank" rel="noopener">WhatsApp us</a></span></div>
+        <div><small>Email</small><a href="mailto:{{ site.email }}"><b>{{ site.email }}</b></a></div>
+        <div><small>Follow JMHC</small>{% set socialClass = "socials-light" %}{% include "partials/socials.njk" %}</div>
+      </div>
+      <div class="care">
+        <h3 style="margin-bottom:6px">Need help now?</h3>
+        <p class="muted">{{ site.emergency }}</p>
+      </div>
+    </div>
+    {% set formName = "Contact message" %}
+    <form class="panel" data-web3forms data-ok="Thank you. Your message has reached the secretariat. We will reply {{ site.replyTime }}." novalidate>
+      {% include "partials/form-hidden.njk" %}
+      <div class="fields">
+        <label for="c-name">Full name<input id="c-name" name="name" required autocomplete="name"></label>
+        <label for="c-email">Email<input id="c-email" name="email" type="email" required autocomplete="email"></label>
+      </div>
+      <label for="c-subj">Subject
+        <select id="c-subj" name="topic"><option>General enquiry</option><option>Registration</option><option>Speaking or abstracts</option><option>Partnership or sponsorship</option><option>Donations</option><option>Media</option></select>
+      </label>
+      <label for="c-msg">Message<textarea id="c-msg" name="message" required></textarea></label>
+      <button class="btn btn-teal" type="submit" style="justify-self:start">Send message</button>
+      <p class="status" role="status" tabindex="-1"></p>
+    </form>
+  </div>
+</div>

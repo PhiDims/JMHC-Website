@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en-NG">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% if title and page.url != "/" %}{{ title }} | {{ site.name }}{% else %}{{ site.name }} | {{ site.tagline }}{% endif %}</title>
+  {% set desc = description or summary or site.description %}
+  <meta name="description" content="{{ desc | striptags | truncate(158) }}">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ title or site.name }}">
+  <meta property="og:description" content="{{ desc | striptags | truncate(158) }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}{{ image or '/assets/img/og-image.png' }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#245A55">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&family=Figtree:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "{{ site.name }}",
+    "alternateName": "{{ site.shortName }}",
+    "url": "{{ site.url }}",
+    "logo": "{{ site.url }}/assets/img/apple-touch-icon.png",
+    "slogan": "{{ site.tagline }}",
+    "email": "{{ site.email }}",
+    "telephone": "{{ site.phoneLink }}",
+    "address": { "@type": "PostalAddress", "addressLocality": "Jos", "addressRegion": "Plateau State", "addressCountry": "NG" }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="mark" viewBox="0 0 48 48">
+        <ellipse cx="24" cy="39" rx="19" ry="7.5" fill="#245A55"/>
+        <ellipse cx="22.5" cy="27.5" rx="12.5" ry="6" fill="#243447"/>
+        <ellipse cx="25" cy="18.5" rx="7.5" ry="4.2" fill="#3F7C75"/>
+        <circle cx="25" cy="8" r="5" fill="#E9A857"/>
+      </symbol>
+    </defs>
+  </svg>
+  {% include "partials/header.njk" %}
+  <main id="main">
+    {% if hero %}
+    <div class="page-hero"><div class="wrap">
+      <p class="eyebrow">{{ hero.eyebrow }}</p>
+      <h1>{{ hero.title }}</h1>
+      {% if hero.lead %}<p class="lead">{{ hero.lead }}</p>{% endif %}
+      {% if hero.button %}<div class="btns"><a class="btn btn-primary" href="{{ hero.button.href }}">{{ hero.button.label }}</a></div>{% endif %}
+    </div></div>
+    {% endif %}
+    {{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+  <script src="/assets/js/site.js" defer></script>
+</body>
+</html>

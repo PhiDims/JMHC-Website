@@ -1,0 +1,42 @@
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="grid" style="gap:16px">
+        <a class="brand" href="/" style="color:var(--on-dark)"><svg><use href="#mark"/></svg><span class="brand-name"><b>{{ site.name }}</b><span style="color:var(--on-dark-muted)">{{ site.tagline }}</span></span></a>
+        {% set socialClass = "" %}{% include "partials/socials.njk" %}
+        <p style="color:var(--on-dark-muted)">Get conference news, calls for abstracts and registration alerts.</p>
+        {% set formName = "Mailing list" %}
+        <form class="inline-sub" data-web3forms data-ok="Subscribed. Watch your inbox for {{ site.shortName }} updates." novalidate>
+          {% include "partials/form-hidden.njk" %}
+          <label for="f-email" style="position:absolute;left:-9999px">Email address</label>
+          <input id="f-email" type="email" name="email" required placeholder="Your email address" autocomplete="email">
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+          <p class="status" role="status" tabindex="-1" style="flex-basis:100%"></p>
+        </form>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="/about/">About JMHC</a></li>
+          <li><a href="/about/#cwc">Central Working Committee</a></li>
+          <li><a href="/conference/">The {{ conference.year }} Conference</a></li>
+          <li><a href="/partners/">Partners and Stakeholders</a></li>
+          <li><a href="/news/">News and Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Get involved</h3>
+        <ul>
+          <li><a href="/partner-with-us/#sponsor">Sponsor</a></li>
+          <li><a href="/partner-with-us/#give">Donate</a></li>
+          <li><a href="/partner-with-us/#partner-form">Partner or volunteer</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© {{ "" | year }} {{ site.name }}. Owned by the Central Working Committee. Powered by <a href="{{ site.poweredByUrl }}">{{ site.poweredBy }}</a>.</span>
+      <span><a href="/privacy/">Privacy</a></span>
+    </div>
+  </div>
+</footer>

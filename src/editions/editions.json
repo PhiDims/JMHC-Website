@@ -1,0 +1,1 @@
+{ "layout": "layouts/edition.njk", "permalink": "/editions/{{ year }}/" }

@@ -1,0 +1,14 @@
+{# The planning status of the current edition. Edit in /admin → Site settings → Current conference. #}
+{% macro row(label, value, waitLabel="Awaiting CWC") %}
+<div class="board-row"><b>{{ label }}{% if value %}: {{ value }}{% endif %}</b>{% if value %}<em class="st st-ok">Confirmed</em>{% else %}<em class="st st-wait">{{ waitLabel }}</em>{% endif %}</div>
+{% endmacro %}
+<div class="board" aria-label="{{ conference.year }} planning status">
+  <div class="board-head"><span>JMHC {{ conference.year }}</span><span class="muted" style="font-weight:500">Updated {{ conference.statusUpdated }}</span></div>
+  {{ row("Host city", "Jos, Plateau State") }}
+  {{ row("Edition year", conference.year) }}
+  {{ row("Dates", conference.dates) }}
+  {{ row("Venue", conference.venue) }}
+  {{ row("Official theme", conference.theme) }}
+  {{ row("Speakers & programme", "Published" if conference.programmeConfirmed else "") }}
+  {{ row("Registration", "Open" if conference.registrationOpen else "", "Opens later") }}
+</div>

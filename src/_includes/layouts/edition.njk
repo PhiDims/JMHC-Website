@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+---
+{% set eyr = year %}
+<div class="page-hero"><div class="wrap">
+  <p class="eyebrow"><a class="back" href="/news/#archive">← Past editions</a></p>
+  <h1>JMHC {{ year }}{% if city %}, {{ city }}{% endif %}</h1>
+  {% if theme %}<p class="tagline">{{ theme }}</p>{% endif %}
+  {% if dates %}<p class="lead">{{ dates }}{% if venue %} · {{ venue }}{% endif %}</p>{% endif %}
+</div></div>
+<div class="section"><div class="wrap split">
+  <article class="article">{{ content | safe }}</article>
+  <div class="grid" style="gap:12px;align-content:start">
+    {% for d in documents %}<div class="doc"><span class="doc-ico">PDF</span><div><a href="{{ d.file }}">{{ d.title }}</a></div><a class="st st-ok" href="{{ d.file }}" style="text-decoration:none">Download</a></div>{% endfor %}
+    {% for m in media %}<div class="doc"><span class="doc-ico">LINK</span><div><a href="{{ m.link }}" target="_blank" rel="noopener">{{ m.title }}</a><small>{{ m.outlet }}</small></div></div>{% endfor %}
+  </div>
+</div></div>
+{% set sp = collections.speakers | forEdition(eyr) %}
+{% if sp.length %}<div class="section band"><div class="wrap"><div class="sec-head"><p class="eyebrow">Speakers</p></div><div class="grid g4">
+{% for s in sp %}<div class="card member speaker"><div class="avatar{% if s.data.photo %} has-photo{% endif %}">{% if s.data.photo %}<img src="{{ s.data.photo }}" alt="" loading="lazy">{% endif %}</div><b>{{ s.data.name }}</b><span class="muted">{{ s.data.position }}</span>{% if s.data.session %}<p style="font-size:.92rem">{{ s.data.session }}</p>{% endif %}</div>{% endfor %}
+</div></div></div>{% endif %}
+{% if photos.length %}<div class="section"><div class="wrap"><div class="sec-head"><p class="eyebrow">Photographs</p></div><div class="grid g3">
+{% for p in photos %}<figure style="margin:0"><img src="{{ p.image }}" alt="{{ p.caption }}" loading="lazy" style="border-radius:var(--r);aspect-ratio:4/3;object-fit:cover;width:100%">{% if p.caption %}<figcaption class="muted" style="font-size:.85rem;margin-top:6px">{{ p.caption }}</figcaption>{% endif %}</figure>{% endfor %}
+</div></div></div>{% endif %}

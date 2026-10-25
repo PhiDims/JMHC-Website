@@ -1,0 +1,106 @@
+---
+layout: layouts/base.njk
+title: Partner With Us
+description: Sponsor the Jos Mental Health Conference, partner as an institution, donate, exhibit or volunteer.
+permalink: /partner-with-us/
+hero:
+  eyebrow: Partner With Us
+  title: Help put mental health on Northern Nigeria's agenda
+  lead: Sponsor the conference, partner as an institution, give a donation, exhibit or volunteer. Every form of support is acknowledged and reported.
+---
+<div class="section-tight">
+  <div class="wrap ways">
+    <a class="way" href="#sponsor"><b>Sponsor</b><span>Fund the conference and gain visibility</span></a>
+    <a class="way" href="#partner-form"><b>Partner</b><span>Co-host, co-design or bring your network</span></a>
+    <a class="way" href="#give"><b>Donate</b><span>Give any amount toward specific needs</span></a>
+    <a class="way" href="#partner-form"><b>Exhibit</b><span>Show your services to delegates</span></a>
+    <a class="way" href="#partner-form"><b>Volunteer</b><span>Give time on the conference days</span></a>
+  </div>
+</div>
+
+<div class="section" id="sponsor">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Sponsorship</p>
+      <h2>Sponsorship packages</h2>
+      <p class="lead">Package values for {{ conference.year }} will be in the sponsorship prospectus. Request a copy with the form below.</p>
+    </div>
+    <div class="grid g4">
+      <div class="card tier lead-tier"><p class="eyebrow">Tier 1</p><h3>Lead partner</h3><p>Headline support for the whole edition.</p><ul><li>Named as lead partner</li><li>Opening session slot</li><li>Logo on all materials</li><li>Delegate places</li></ul></div>
+      <div class="card tier"><p class="eyebrow">Tier 2</p><h3>Programme partner</h3><p>Sponsor a track, plenary or workshop.</p><ul><li>Session naming</li><li>Logo on programme</li><li>Delegate places</li></ul></div>
+      <div class="card tier"><p class="eyebrow">Tier 3</p><h3>Community partner</h3><p>Fund outreach and community delegates.</p><ul><li>Recognition at outreach events</li><li>Logo on website</li></ul></div>
+      <div class="card tier"><p class="eyebrow">In kind</p><h3>In-kind partner</h3><p>Venue, printing, media, transport or catering.</p><ul><li>Acknowledged by contribution</li><li>Logo on website</li></ul></div>
+    </div>
+  </div>
+</div>
+
+<div class="section on-dark" id="give">
+  <div class="wrap split">
+    <div class="prose">
+      <p class="eyebrow">Donate</p>
+      <h2>Give toward a specific need</h2>
+      <p class="lead">Donations are reported back to donors after each edition.</p>
+      <ul class="uses">
+        <li><div><b>Delegate bursaries</b><span>Places for students, community health workers and faith leaders who cannot pay.</span></div></li>
+        <li><div><b>Community outreach</b><span>Awareness sessions in affected and displaced communities before and after the conference.</span></div></li>
+        <li><div><b>Language access</b><span>Hausa interpretation and sign language so more people can take part.</span></div></li>
+        <li><div><b>Reports and resources</b><span>Publishing conference outcomes and free materials for the public.</span></div></li>
+      </ul>
+    </div>
+    {% set formName = "Donation pledge" %}
+    <form class="panel" style="color:var(--ink)" data-web3forms data-ok="Thank you. Your pledge is recorded. The secretariat will send you payment details and a receipt." novalidate>
+      {% include "partials/form-hidden.njk" %}
+      <h3>Make a pledge</h3>
+      <fieldset style="border:0;padding:0;margin:0;display:grid;gap:10px">
+        <legend style="font-weight:600;font-size:.92rem;margin-bottom:8px">Amount (₦)</legend>
+        <div class="amounts">
+          <input type="radio" name="amount" id="a1" value="₦5,000"><label for="a1">₦5,000</label>
+          <input type="radio" name="amount" id="a2" value="₦10,000" checked><label for="a2">₦10,000</label>
+          <input type="radio" name="amount" id="a3" value="₦25,000"><label for="a3">₦25,000</label>
+          <input type="radio" name="amount" id="a4" value="₦50,000"><label for="a4">₦50,000</label>
+          <input type="radio" name="amount" id="a5" value="₦100,000"><label for="a5">₦100,000</label>
+          <input type="radio" name="amount" id="a6" value="Other"><label for="a6">Other</label>
+        </div>
+        <label for="d-other" id="otherWrap" hidden>Other amount (₦)<input id="d-other" name="other_amount" inputmode="numeric" placeholder="Enter amount"></label>
+      </fieldset>
+      <div class="fields">
+        <label for="d-freq">Frequency<select id="d-freq" name="frequency"><option>One time</option><option>Monthly</option><option>Per edition</option></select></label>
+        <label for="d-use">Direct my gift to<select id="d-use" name="direct_to"><option>Where most needed</option><option>Delegate bursaries</option><option>Community outreach</option><option>Language access</option><option>Reports and resources</option></select></label>
+        <label for="d-name">Full name<input id="d-name" name="name" required autocomplete="name"></label>
+        <label for="d-email">Email<input id="d-email" name="email" type="email" required autocomplete="email"></label>
+      </div>
+      <label class="check"><input type="checkbox" id="d-anon" name="anonymous" value="Yes"> Keep my gift anonymous</label>
+      <button class="btn btn-primary" type="submit" style="justify-self:start">Pledge my gift</button>
+      <p class="status" role="status" tabindex="-1"></p>
+      <p class="form-note">Bank transfer and card payments open once the CWC confirms the official conference account. Until then, pledges are confirmed by the secretariat directly. Diaspora and foreign-currency gifts are welcome.</p>
+    </form>
+  </div>
+</div>
+
+<div class="section band" id="partner-form">
+  <div class="wrap split">
+    <div class="prose">
+      <p class="eyebrow">Partnership enquiry</p>
+      <h2>Tell us how you would like to work with JMHC</h2>
+      <p class="muted">Use this form for sponsorship, institutional partnership, exhibition and volunteering. The secretariat replies {{ site.replyTime }}.</p>
+      <p class="muted">Partner and sponsor names are published only after mutual agreement and CWC approval.</p>
+    </div>
+    {% set formName = "Partnership enquiry" %}
+    <form class="panel" data-web3forms data-ok="Thank you. Your enquiry has reached the secretariat. We will reply {{ site.replyTime }}." novalidate>
+      {% include "partials/form-hidden.njk" %}
+      <div class="fields">
+        <label for="p-name">Contact name<input id="p-name" name="name" required autocomplete="name"></label>
+        <label for="p-org">Organisation<input id="p-org" name="organisation" required autocomplete="organization"></label>
+        <label for="p-email">Email<input id="p-email" name="email" type="email" required autocomplete="email"></label>
+        <label for="p-phone">Phone<input id="p-phone" name="phone" type="tel" autocomplete="tel"></label>
+      </div>
+      <label for="p-type">Interested in
+        <select id="p-type" name="interest" required><option value="">Choose one</option><option>Sponsorship</option><option>Institutional partnership</option><option>In-kind support</option><option>Exhibition</option><option>Volunteering</option><option>Media partnership</option></select>
+      </label>
+      <label for="p-msg">Message<textarea id="p-msg" name="message" placeholder="What would you like to support or contribute?"></textarea></label>
+      <label class="check"><input type="checkbox" id="p-prosp" name="send_prospectus" value="Yes" checked> Send me the {{ conference.year }} sponsorship prospectus when it is ready</label>
+      <button class="btn btn-teal" type="submit" style="justify-self:start">Send enquiry</button>
+      <p class="status" role="status" tabindex="-1"></p>
+    </form>
+  </div>
+</div>

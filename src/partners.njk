@@ -1,0 +1,54 @@
+---
+layout: layouts/base.njk
+title: Partners and Stakeholders
+description: The organisations that make the Jos Mental Health Conference possible, and the stakeholder groups JMHC brings together.
+permalink: /partners/
+hero:
+  eyebrow: Partners and Stakeholders
+  title: The organisations that make JMHC possible
+  lead: Organisations appear on this page only with their approval and the approval of the Central Working Committee.
+---
+{% macro slot(p) %}
+<{% if p.data.website %}a href="{{ p.data.website }}" target="_blank" rel="noopener"{% else %}div{% endif %} class="logo-slot filled" style="text-decoration:none">
+  <div>{% if p.data.logo %}<img src="{{ p.data.logo }}" alt="{{ p.data.name }} logo" loading="lazy">{% endif %}<b>{{ p.data.name }}</b>{% if p.data.note %}<span class="muted">{{ p.data.note }}</span>{% endif %}</div>
+</{% if p.data.website %}a{% else %}div{% endif %}>
+{% endmacro %}
+
+<div class="section">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Powered by</p></div>
+    <div class="grid g3">
+      <a class="logo-slot filled" href="{{ site.poweredByUrl }}" target="_blank" rel="noopener" style="text-decoration:none"><div><b>{{ site.poweredBy }}</b><span class="muted">Secretariat · Jos</span></div></a>
+    </div>
+  </div>
+</div>
+
+<div class="section-tight">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">{{ conference.year }} partners and sponsors</p><h2>{% if collections.partners.length %}Thank you to our partners{% else %}Listings open after approval{% endif %}</h2></div>
+    <div class="grid g4">
+      {% set tiers = ["Lead partner","Programme partner","Community partner","Media partner"] %}
+      {% for t in tiers %}
+        {% set inTier = collections.partners | byTier(t) %}
+        {% if inTier.length %}{% for p in inTier %}{{ slot(p) }}{% endfor %}
+        {% else %}<div class="logo-slot">{{ t }}<br>listing pending</div>{% endif %}
+      {% endfor %}
+      {% for p in collections.partners | byTier("In-kind partner") %}{{ slot(p) }}{% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="section band">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Stakeholder groups</p><h2>Who we bring together</h2></div>
+    <div class="grid g3">
+      <div class="card"><h3>Health and clinical</h3><p>Teaching hospitals, psychiatric services, primary health care centres and private practices.</p></div>
+      <div class="card"><h3>Academic and research</h3><p>Universities, research groups and training institutions in Plateau and across the North.</p></div>
+      <div class="card"><h3>Community and faith</h3><p>Churches, mosques, community-based organisations, traditional leaders and youth groups.</p></div>
+      <div class="card"><h3>Government</h3><p>Ministries of health, education and humanitarian affairs, and relevant agencies.</p></div>
+      <div class="card"><h3>NGOs and development partners</h3><p>Humanitarian, peacebuilding and MHPSS organisations working with affected communities.</p></div>
+      <div class="card"><h3>Private sector and media</h3><p>Businesses, sponsors and media houses who help carry the message.</p></div>
+    </div>
+    <div class="btns" style="margin-top:32px"><a class="btn btn-teal" href="/partner-with-us/#partner-form">Enquire about partnership</a></div>
+  </div>
+</div>

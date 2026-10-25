@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+---
+<div class="page-hero"><div class="wrap">
+  <p class="eyebrow"><a class="back" href="/news/">← News</a></p>
+  <h1>{{ title }}</h1>
+  <p class="muted">{{ page.date | longDate }}{% if author %} · {{ author }}{% endif %}</p>
+</div></div>
+<div class="section"><div class="wrap">
+  <article class="article">
+    {% if image %}<img src="{{ image }}" alt="" loading="lazy">{% endif %}
+    {{ content | safe }}
+  </article>
+</div></div>

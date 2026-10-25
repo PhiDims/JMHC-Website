@@ -1,0 +1,90 @@
+---
+layout: layouts/base.njk
+title: The 2027 Conference
+description: JMHC 2027 in Jos, Plateau State. Theme, dates, venue, speakers, programme and registration.
+permalink: /conference/
+---
+{% set yr = conference.year %}
+{% set speakers = collections.speakers | forEdition(yr) %}
+<div class="page-hero"><div class="wrap">
+  <p class="eyebrow">The {{ yr }} Conference</p>
+  <h1>JMHC {{ yr }}, Jos</h1>
+  {% if conference.theme %}<p class="tagline">{{ conference.theme }}</p>{% endif %}
+  <p class="lead">{% if conference.dates %}{{ conference.dates }}{% if conference.venue %} · {{ conference.venue }}{% endif %}{% else %}Planning is under way. The theme, dates, venue, speakers and programme will be published here once the Central Working Committee approves them.{% endif %}</p>
+  <div class="btns"><a class="btn btn-primary" href="#register">{% if conference.registrationOpen %}Register now{% else %}Register your interest{% endif %}</a></div>
+</div></div>
+
+<div class="section">
+  <div class="wrap split">
+    <div class="grid" style="gap:20px">
+      <article class="card"><p class="eyebrow">Programme</p><h3>Plenaries, workshops and community sessions</h3>
+        {% if conference.programmeConfirmed and conference.programmeLink %}<p>The programme is ready.</p><a class="btn btn-teal" href="{{ conference.programmeLink }}" style="justify-self:start">Download the programme</a>
+        {% else %}<p>The detailed programme will list each session, its room and its speakers. Expect a mix of clinical, research, community and policy tracks.</p><em class="st st-wait" style="justify-self:start">Awaiting CWC</em>{% endif %}
+      </article>
+      <article class="card"><p class="eyebrow">Call for abstracts</p><h3>Share your work</h3>
+        {% if conference.abstractsOpen %}<p>Abstracts are open{% if conference.abstractsDeadline %} until {{ conference.abstractsDeadline }}{% endif %}.</p>{% if conference.abstractsLink %}<a class="btn btn-teal" href="{{ conference.abstractsLink }}" style="justify-self:start">Submit an abstract</a>{% endif %}
+        {% else %}<p>Researchers and practitioners will be able to submit abstracts for oral and poster presentations. Guidelines and deadlines will follow.</p><em class="st st-wait" style="justify-self:start">Opens later</em>{% endif %}
+      </article>
+    </div>
+    {% include "partials/status-board.njk" %}
+  </div>
+</div>
+
+<div class="section band" id="speakers">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Speakers</p><h2>Who you will hear from</h2>
+      {% if not speakers.length %}<p class="muted">Speakers are listed once they accept and the Central Working Committee approves. Check back, or join the mailing list.</p>{% endif %}
+    </div>
+    {% if speakers.length %}
+    <div class="grid g4">
+      {% for s in speakers %}
+      <div class="card member speaker">
+        <div class="avatar{% if s.data.photo %} has-photo{% endif %}" aria-hidden="true">{% if s.data.photo %}<img src="{{ s.data.photo }}" alt="" loading="lazy">{% endif %}</div>
+        <b>{{ s.data.name }}</b>
+        <span class="muted">{{ s.data.position }}</span>
+        {% if s.data.session %}<p style="color:var(--ink);font-size:.95rem"><b>Session:</b> {{ s.data.session }}</p>{% endif %}
+        {% if s.content | striptags | trim %}<div class="muted" style="font-size:.92rem">{{ s.content | safe }}</div>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="section" id="register">
+  <div class="wrap split">
+    <div class="prose">
+      <p class="eyebrow">Registration</p>
+      {% if conference.registrationOpen and conference.registrationLink %}
+      <h2>Registration is open</h2>
+      <p class="muted">Register online. Group registrations for hospitals, schools, churches, mosques and NGOs are available.</p>
+      <div class="btns"><a class="btn btn-primary" href="{{ conference.registrationLink }}">Register now</a></div>
+      {% else %}
+      <h2>Be first to know when registration opens</h2>
+      <p class="muted">Full registration, with fees and categories, opens when event details are confirmed. Register your interest now and the secretariat will contact you directly.</p>
+      <p class="muted">Group registrations for hospitals, schools, churches, mosques and NGOs will be available.</p>
+      {% endif %}
+    </div>
+    {% set formName = "Registration interest" %}
+    <form class="panel" data-web3forms data-ok="Thank you. Your interest is recorded and the secretariat will contact you when registration opens." novalidate>
+      {% include "partials/form-hidden.njk" %}
+      <div class="fields">
+        <label for="r-name">Full name<input id="r-name" name="name" required autocomplete="name"></label>
+        <label for="r-email">Email<input id="r-email" name="email" type="email" required autocomplete="email"></label>
+        <label for="r-phone">Phone / WhatsApp<input id="r-phone" name="phone" type="tel" autocomplete="tel"></label>
+        <label for="r-state">State<input id="r-state" name="state" placeholder="e.g. Plateau"></label>
+      </div>
+      <label for="r-cat">I am attending as
+        <select id="r-cat" name="category" required>
+          <option value="">Choose one</option>
+          <option>Mental health professional</option><option>Other healthcare provider</option><option>Student</option><option>Researcher / academic</option><option>Educator</option><option>Faith leader</option><option>NGO / community organisation</option><option>Government / policymaker</option><option>Development partner</option><option>Member of the public</option>
+        </select>
+      </label>
+      <label for="r-org">Organisation (optional)<input id="r-org" name="organisation" autocomplete="organization"></label>
+      <label class="check"><input type="checkbox" id="r-abs" name="wants_to_submit_abstract" value="Yes"> I would like to submit an abstract</label>
+      <button class="btn btn-teal" type="submit" style="justify-self:start">Register interest</button>
+      <p class="status" role="status" tabindex="-1"></p>
+      <p class="form-note">We use your details only to contact you about JMHC. See our <a href="/privacy/">privacy notice</a>.</p>
+    </form>
+  </div>
+</div>

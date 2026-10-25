@@ -1,0 +1,8 @@
+{# Social links. Set the addresses in /admin → Site settings. Empty ones show as "coming soon". #}
+{% set networks = [["facebook","Facebook"],["instagram","Instagram"],["x","X (Twitter)"],["linkedin","LinkedIn"]] %}
+<nav class="socials {{ socialClass }}" aria-label="{{ site.shortName }} on social media">
+  {% for n in networks %}
+  {% set link = site.socials[n[0]] %}
+  {% if link %}<a href="{{ link }}" target="_blank" rel="noopener">{{ n[1] }}</a>{% else %}<a aria-disabled="true" title="Link coming soon">{{ n[1] }}</a>{% endif %}
+  {% endfor %}
+</nav>

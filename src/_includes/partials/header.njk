@@ -1,0 +1,16 @@
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="brand" href="/" aria-label="{{ site.name }}, home">
+      <svg><use href="#mark"/></svg>
+      <span class="brand-name"><b>{{ site.shortName }}</b><span>{{ site.name }}</span></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      {% for item in nav %}
+      {% set current = (page.url == item.url) or (item.url != "/" and page.url.startsWith(item.url)) %}
+      <a href="{{ item.url }}"{% if current %} aria-current="page"{% endif %}>{{ item.label | safe }}</a>
+      {% endfor %}
+      <a href="/partner-with-us/" class="give"{% if page.url == "/partner-with-us/" %} aria-current="page"{% endif %}>Partner &amp; Give</a>
+    </nav>
+  </div>
+</header>

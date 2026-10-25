@@ -1,0 +1,5 @@
+{# Hidden fields every form sends to Web3Forms. Set the key in /admin → Site settings. #}
+<input type="hidden" name="access_key" value="{{ site.web3formsKey }}">
+<input type="hidden" name="subject" value="JMHC website: {{ formName }}">
+<input type="hidden" name="from_name" value="JMHC website">
+<input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off">

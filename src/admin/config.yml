@@ -1,0 +1,191 @@
+# JMHC website editor (Decap CMS)
+# Committee members sign in with GitHub at josmhconference.com/admin
+# Every save is published automatically by Cloudflare within about a minute.
+
+backend:
+  name: github
+  repo: PhiDims/JMHC-Website
+  branch: main
+  base_url: https://josmhconference.com
+  auth_endpoint: api/auth
+  commit_messages:
+    create: "Add {{collection}}: {{slug}}"
+    update: "Update {{collection}}: {{slug}}"
+    delete: "Remove {{collection}}: {{slug}}"
+
+site_url: https://josmhconference.com
+display_url: https://josmhconference.com
+logo_url: /assets/img/apple-touch-icon.png
+locale: en
+
+media_folder: src/assets/uploads
+public_folder: /assets/uploads
+
+collections:
+
+  # ---------- Current conference ----------
+  - name: conference
+    label: Current conference
+    editor: { preview: false }
+    files:
+      - name: conference
+        label: Conference details and status
+        file: src/_data/conference.json
+        description: Fill a field only after the Central Working Committee approves it. Empty fields show as "Awaiting CWC".
+        fields:
+          - { label: Edition year, name: year, widget: number, value_type: int }
+          - { label: Status last updated, name: statusUpdated, widget: string, hint: "e.g. Jan 2027" }
+          - { label: Official theme, name: theme, widget: string, required: false }
+          - { label: Dates as shown, name: dates, widget: string, required: false, hint: "e.g. 14 to 16 July 2027" }
+          - { label: Venue, name: venue, widget: string, required: false }
+          - { label: Programme published, name: programmeConfirmed, widget: boolean, required: false }
+          - { label: Programme file or link, name: programmeLink, widget: file, required: false }
+          - { label: Registration open, name: registrationOpen, widget: boolean, required: false }
+          - { label: Registration link, name: registrationLink, widget: string, required: false, hint: "Google Form, Paystack page or similar" }
+          - { label: Call for abstracts open, name: abstractsOpen, widget: boolean, required: false }
+          - { label: Abstract submission link, name: abstractsLink, widget: string, required: false }
+          - { label: Abstract deadline, name: abstractsDeadline, widget: string, required: false }
+
+  # ---------- News ----------
+  - name: news
+    label: News
+    label_singular: News item
+    folder: src/news
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{date | date('D MMM YYYY')}}: {{title}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, time_format: false, date_format: "D MMM YYYY" }
+      - { label: Short summary, name: summary, widget: text, hint: "One or two sentences for lists and link previews." }
+      - { label: Author, name: author, widget: string, required: false }
+      - { label: Image, name: image, widget: image, required: false, hint: "Real photos with consent." }
+      - { label: Draft (hide from site), name: draft, widget: boolean, default: false, required: false }
+      - { label: Story, name: body, widget: markdown }
+
+  # ---------- Committee ----------
+  - name: committee
+    label: Central Working Committee
+    label_singular: Committee member
+    description: Shown on the About page. List people only with their consent.
+    folder: src/committee
+    create: true
+    slug: "{{order}}-{{role}}"
+    identifier_field: role
+    summary: "{{order}}. {{role}}: {{name}}"
+    fields:
+      - { label: Committee role, name: role, widget: string }
+      - { label: Name, name: name, widget: string, required: false }
+      - { label: Title and organisation, name: position, widget: string, required: false }
+      - { label: Photo, name: photo, widget: image, required: false, hint: "Square head-and-shoulders photo." }
+      - { label: Order on the page, name: order, widget: number, value_type: int }
+
+  # ---------- Speakers ----------
+  - name: speakers
+    label: Speakers
+    label_singular: Speaker
+    description: A speaker appears only when "Approved by CWC" is ticked.
+    folder: src/speakers
+    create: true
+    slug: "{{edition}}-{{name}}"
+    identifier_field: name
+    summary: "{{edition}}: {{name}}"
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: Title and organisation, name: position, widget: string }
+      - { label: Edition year, name: edition, widget: number, value_type: int, default: 2027 }
+      - { label: Session, name: session, widget: string, required: false }
+      - { label: Photo, name: photo, widget: image, required: false }
+      - { label: Order, name: order, widget: number, value_type: int, default: 10 }
+      - { label: Approved by CWC, name: approved, widget: boolean, default: false }
+      - { label: Short bio, name: body, widget: markdown, required: false }
+
+  # ---------- Partners ----------
+  - name: partners
+    label: Partners and sponsors
+    label_singular: Partner
+    description: A partner appears only when "Approved for listing" is ticked, after mutual agreement and CWC approval.
+    folder: src/partners
+    create: true
+    slug: "{{name}}"
+    identifier_field: name
+    summary: "{{tier}}: {{name}}"
+    fields:
+      - { label: Organisation name, name: name, widget: string }
+      - { label: Tier, name: tier, widget: select, options: ["Lead partner", "Programme partner", "Community partner", "Media partner", "In-kind partner"] }
+      - { label: Logo, name: logo, widget: image, required: false }
+      - { label: Website, name: website, widget: string, required: false }
+      - { label: Short note, name: note, widget: string, required: false, hint: "e.g. Venue partner" }
+      - { label: Order, name: order, widget: number, value_type: int, default: 10 }
+      - { label: Approved for listing, name: approved, widget: boolean, default: false }
+
+  # ---------- Past editions ----------
+  - name: editions
+    label: Past editions (archive)
+    label_singular: Edition
+    description: After each conference, add its record here. It gets its own page and appears in the archive.
+    folder: src/editions
+    create: true
+    slug: "{{year}}"
+    identifier_field: year
+    summary: "JMHC {{year}}"
+    fields:
+      - { label: Year, name: year, widget: number, value_type: int }
+      - { label: City, name: city, widget: string, default: Jos }
+      - { label: Theme, name: theme, widget: string, required: false }
+      - { label: Dates, name: dates, widget: string, required: false }
+      - { label: Venue, name: venue, widget: string, required: false }
+      - { label: One-line summary, name: summary, widget: text, required: false }
+      - { label: Documents (report, programme), name: documents, widget: list, required: false, fields: [{ label: Title, name: title, widget: string }, { label: File, name: file, widget: file }] }
+      - { label: Media coverage, name: media, widget: list, required: false, fields: [{ label: Headline, name: title, widget: string }, { label: Outlet, name: outlet, widget: string }, { label: Link, name: link, widget: string }] }
+      - { label: Photographs, name: photos, widget: list, required: false, fields: [{ label: Photo, name: image, widget: image }, { label: Caption, name: caption, widget: string, required: false }] }
+      - { label: Outcomes and highlights, name: body, widget: markdown, required: false }
+
+  # ---------- Site settings ----------
+  - name: settings
+    label: Site settings
+    editor: { preview: false }
+    files:
+      - name: site
+        label: Contact details, socials and statements
+        file: src/_data/site.json
+        fields:
+          - { label: Conference name, name: name, widget: string }
+          - { label: Short name, name: shortName, widget: string }
+          - { label: Tagline, name: tagline, widget: string }
+          - { label: Website address, name: url, widget: string }
+          - { label: Site description (Google), name: description, widget: text }
+          - { label: Powered by, name: poweredBy, widget: string }
+          - { label: Powered by website, name: poweredByUrl, widget: string }
+          - { label: Phone as shown, name: phoneDisplay, widget: string }
+          - { label: Phone for calling (+234…), name: phoneLink, widget: string }
+          - { label: WhatsApp number (digits only), name: whatsapp, widget: string }
+          - { label: Email, name: email, widget: string }
+          - { label: City, name: city, widget: string }
+          - { label: Reply time promise, name: replyTime, widget: string }
+          - { label: Web3Forms access key, name: web3formsKey, widget: string, required: false, hint: "From web3forms.com. Without it, forms ask people to WhatsApp or email instead." }
+          - label: Social media links
+            name: socials
+            widget: object
+            fields:
+              - { label: Facebook, name: facebook, widget: string, required: false }
+              - { label: Instagram, name: instagram, widget: string, required: false }
+              - { label: X (Twitter), name: x, widget: string, required: false }
+              - { label: LinkedIn, name: linkedin, widget: string, required: false }
+          - { label: "Show 'Proposed' tag on vision, mission and purpose", name: statementsProposed, widget: boolean, hint: "Untick once the CWC approves them." }
+          - { label: Vision, name: vision, widget: text }
+          - { label: Mission, name: mission, widget: text }
+          - { label: Purpose, name: purpose, widget: text }
+          - { label: Emergency message, name: emergency, widget: text }
+      - name: documents
+        label: Downloadable documents
+        file: src/_data/documents.json
+        fields:
+          - label: Documents
+            name: items
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Detail line, name: detail, widget: string, required: false }
+              - { label: File (PDF), name: file, widget: file, required: false, hint: "Leave empty to show it as coming soon." }
+              - { label: Label while not uploaded, name: status, widget: string, required: false, default: "Soon" }

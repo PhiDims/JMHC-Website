@@ -1,0 +1,111 @@
+---
+layout: layouts/base.njk
+---
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Jos, Plateau State · Next edition {{ conference.year }}</p>
+      <h1>Advancing mental health through collaboration and action.</h1>
+      <p class="tagline">{{ site.tagline }}</p>
+      <p class="lead">The Jos Mental Health Conference brings clinicians, community workers, faith leaders, researchers and policymakers into one room, and keeps the work going between editions.</p>
+      <div class="btns">
+        <a class="btn btn-primary" href="/conference/#register">{% if conference.registrationOpen %}Register now{% else %}Register your interest{% endif %}</a>
+        <a class="btn btn-ghost" href="/partner-with-us/">Partner with us</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 520 380">
+        <circle cx="360" cy="110" r="58" fill="#E9A857" opacity=".95"/>
+        <circle cx="360" cy="110" r="88" fill="#E9A857" opacity=".14"/>
+        <path d="M0 300 C70 260 120 270 170 250 C230 225 270 250 330 236 C400 220 450 240 520 225 L520 380 L0 380Z" fill="#245A55" opacity=".35"/>
+        <ellipse cx="150" cy="300" rx="88" ry="34" fill="#245A55"/>
+        <ellipse cx="140" cy="248" rx="58" ry="26" fill="#243447"/>
+        <ellipse cx="156" cy="206" rx="36" ry="18" fill="#3F7C75"/>
+        <ellipse cx="148" cy="176" rx="20" ry="11" fill="#243447"/>
+        <ellipse cx="300" cy="318" rx="70" ry="28" fill="#243447"/>
+        <ellipse cx="312" cy="276" rx="42" ry="20" fill="#245A55"/>
+        <ellipse cx="420" cy="322" rx="60" ry="24" fill="#3F7C75"/>
+        <ellipse cx="428" cy="290" rx="30" ry="14" fill="#243447"/>
+        <path d="M0 330 C120 310 260 340 380 320 C440 312 490 318 520 314 L520 380 L0 380Z" fill="#243447"/>
+      </svg>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="facts">
+      <div class="fact"><small>Edition</small><b>{{ conference.year }}</b></div>
+      <div class="fact"><small>City</small><b>Jos, Plateau State</b></div>
+      <div class="fact"><small>Date &amp; venue</small><b>{% if conference.dates %}{{ conference.dates }}{% if conference.venue %}, {{ conference.venue }}{% endif %}{% else %}To be announced <span class="pend">Pending</span>{% endif %}</b></div>
+      <div class="fact"><small>Theme</small><b>{% if conference.theme %}{{ conference.theme }}{% else %}To be announced <span class="pend">Pending</span>{% endif %}</b></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">More than an event</p>
+      <h2>A standing platform for mental health in Northern Nigeria</h2>
+      <p class="lead">The conference days are one part of it. Between editions, JMHC works on six things.</p>
+    </div>
+    <div class="grid g3">
+      <article class="card focus"><h3>Professional development</h3><p>Training and case-based learning for psychologists, psychiatrists, nurses, social workers, counsellors and teachers.</p></article>
+      <article class="card focus"><h3>Public awareness</h3><p>Plain-language education in English and Hausa that reduces stigma and helps families know when to seek care.</p></article>
+      <article class="card focus"><h3>Trauma-informed care</h3><p>Practice grounded in the realities of conflict, displacement and loss across the Plateau and the wider North.</p></article>
+      <article class="card focus"><h3>Partnership building</h3><p>Connecting hospitals, NGOs, universities, faith communities and government so referrals and resources actually move.</p></article>
+      <article class="card focus"><h3>Advocacy</h3><p>Evidence and voices from the field brought to policymakers and development partners.</p></article>
+      <article class="card focus"><h3>Stronger mental health systems</h3><p>Follow-through on conference outcomes, tracked and reported from one edition to the next.</p></article>
+    </div>
+  </div>
+</div>
+
+<div class="section band">
+  <div class="wrap split">
+    <div class="prose">
+      <p class="eyebrow">Who JMHC is for</p>
+      <h2>Everyone who carries mental health work, inside and outside the clinic</h2>
+      <p class="muted">In Jos, a pastor, a head teacher or a ward leader is often the first person a struggling family turns to. The conference makes room for them alongside clinicians and researchers.</p>
+    </div>
+    <div class="chips">
+      {% for a in ["Mental health professionals","Healthcare providers","NGOs","Community organisations","Government institutions","Universities","Researchers","Educators","Faith leaders","Policymakers","Development partners","Sponsors","Members of the public"] %}<span class="chip">{{ a }}</span>{% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="wrap split">
+    <div class="prose">
+      <p class="eyebrow">{{ conference.year }} at a glance</p>
+      <h2>What is confirmed, and what is coming</h2>
+      <p class="muted">Event details appear here only after the Central Working Committee approves them. Join the mailing list and you will hear the moment they are published.</p>
+      <div class="btns"><a class="btn btn-teal" href="/conference/">See the {{ conference.year }} page</a></div>
+    </div>
+    {% include "partials/status-board.njk" %}
+  </div>
+</div>
+
+{% if collections.news.length %}
+<div class="section band">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Latest news</p></div>
+    <div class="grid g3">
+      {% for post in collections.news | limit(3) %}
+      <a class="card" href="{{ post.url }}" style="text-decoration:none;color:inherit"><small class="muted">{{ post.date | longDate }}</small><h3>{{ post.data.title }}</h3><p>{{ post.data.summary }}</p></a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="section on-dark">
+  <div class="wrap split">
+    <div class="prose">
+      <p class="eyebrow">Support the work</p>
+      <h2>Sponsor, partner or give</h2>
+      <p class="lead">Your support puts community health workers, students and faith leaders in the room who could not otherwise attend, and keeps outreach running after the conference ends.</p>
+    </div>
+    <div class="btns" style="align-self:center">
+      <a class="btn btn-primary" href="/partner-with-us/#give">Make a donation</a>
+      <a class="btn btn-ghost" href="/partner-with-us/#sponsor">Become a sponsor</a>
+    </div>
+  </div>
+</div>

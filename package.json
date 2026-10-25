@@ -1,0 +1,14 @@
+{
+  "name": "jmhc-website",
+  "version": "1.0.0",
+  "description": "Jos Mental Health Conference website",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  },
+  "private": true,
+  "type": "module"
+}

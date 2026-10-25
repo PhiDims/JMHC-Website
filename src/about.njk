@@ -1,0 +1,81 @@
+---
+layout: layouts/base.njk
+title: About JMHC
+description: The vision, mission, purpose and governance of the Jos Mental Health Conference, and the Central Working Committee that leads it.
+permalink: /about/
+hero:
+  eyebrow: About JMHC
+  title: Built in Jos, for the people who hold this region's mental health
+  lead: A recurring, multidisciplinary conference based in Jos, Plateau State, reaching stakeholders across Northern Nigeria and beyond.
+---
+<div class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Vision, mission and purpose</p>
+      <h2>What JMHC stands for</h2>
+      {% if site.statementsProposed %}<p class="muted"><span class="st st-wait">Proposed</span>&nbsp; These statements are for review and approval by the Central Working Committee.</p>{% endif %}
+    </div>
+    <div class="grid g3">
+      <article class="card focus"><p class="eyebrow">Vision</p><p style="color:var(--ink)">{{ site.vision }}</p></article>
+      <article class="card focus"><p class="eyebrow">Mission</p><p style="color:var(--ink)">{{ site.mission }}</p></article>
+      <article class="card focus"><p class="eyebrow">Purpose</p><p style="color:var(--ink)">{{ site.purpose }}</p></article>
+    </div>
+  </div>
+</div>
+
+<div class="section band">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">How we work</p><h2>Our values</h2></div>
+    <div class="grid g4">
+      <div class="card"><h3>Professional</h3><p>Evidence-based content, ethical practice and credible speakers.</p></div>
+      <div class="card"><h3>Compassionate</h3><p>People with lived experience are treated with care and respect.</p></div>
+      <div class="card"><h3>Collaborative</h3><p>Clinics, communities, faith groups and government working as one.</p></div>
+      <div class="card"><h3>Culturally responsive</h3><p>Practice that fits Nigerian families, languages and beliefs.</p></div>
+      <div class="card"><h3>Credible</h3><p>Only approved information, partners and speakers are published.</p></div>
+      <div class="card"><h3>Inclusive</h3><p>Open to professionals, students, community leaders and the public.</p></div>
+      <div class="card"><h3>Forward-looking</h3><p>Each edition builds on the outcomes of the last.</p></div>
+      <div class="card"><h3>Accountable</h3><p>Reports and outcomes are documented and shared openly.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="wrap split">
+    <div class="prose">
+      <p class="eyebrow">Governance</p>
+      <h2>Who stands behind JMHC</h2>
+      <p>The <b>Central Working Committee (CWC)</b> leads the conference. It approves the theme, dates, venue, programme, speakers and every partner or sponsor listing, and it holds ownership of this website and domain. <a href="#cwc">Meet the committee</a>.</p>
+      <p>JMHC is powered by <b>{{ site.poweredBy }}</b>, a clinical psychology and trauma care practice in Jos, which provides the secretariat.</p>
+    </div>
+    <div>
+      <p class="eyebrow" style="margin-bottom:16px">Editions</p>
+      <div class="timeline">
+        <div class="tl next"><b>{{ conference.year }} · Jos</b><p>Next edition.{% if not conference.dates %} Date, venue and theme to be announced.{% endif %}</p></div>
+        {% for e in collections.editions %}{% if e.data.year != conference.year %}
+        <div class="tl"><b><a href="{{ e.url }}">{{ e.data.year }} · {{ e.data.city or "Jos" }}</a></b><p>{{ e.data.theme }}</p></div>
+        {% endif %}{% endfor %}
+        <div class="tl"><b>Archive</b><p>Programmes, speakers, reports, photographs and media coverage from each edition are kept on <a href="/news/#archive">News and Resources</a>.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section band" id="cwc">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Central Working Committee</p>
+      <h2>The people leading JMHC</h2>
+      <p class="muted">Members are listed with their consent.</p>
+    </div>
+    <div class="grid g4">
+      {% for m in collections.committee %}
+      <div class="card member">
+        <div class="avatar{% if m.data.photo %} has-photo{% endif %}" aria-hidden="true">{% if m.data.photo %}<img src="{{ m.data.photo }}" alt="" loading="lazy">{% endif %}</div>
+        <p class="eyebrow">{{ m.data.role }}</p>
+        <b>{{ m.data.name or "Name to be added" }}</b>
+        <span class="muted">{{ m.data.position or "Title, organisation" }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

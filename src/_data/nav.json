@@ -1,0 +1,8 @@
+[
+  { "label": "Home", "url": "/" },
+  { "label": "About JMHC", "url": "/about/" },
+  { "label": "2027 Conference", "url": "/conference/" },
+  { "label": "Partners", "url": "/partners/" },
+  { "label": "News & Resources", "url": "/news/" },
+  { "label": "Contact", "url": "/contact/" }
+]
